@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3001:3001"
+    env_file: .env
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  landing:
+    build: ./landing
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8
+    container_name: mysql-local
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: crm
+      MYSQL_USER: crmuser
+      MYSQL_PASSWORD: crmpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
