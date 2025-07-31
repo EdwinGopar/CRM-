@@ -1,5 +1,6 @@
+# landing/Dockerfile
 FROM nginx:alpine
 
 COPY public/ /usr/share/nginx/html
 
-EXPOSE 3000
+EXPOSE 80

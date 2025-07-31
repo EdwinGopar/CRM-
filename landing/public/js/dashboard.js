@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const res = await fetch("/api/contact", {
+ const res = await fetch("http://localhost:3001/api/contact", {
       headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -64,7 +64,7 @@ async function cambiarEstado(id, nuevoEstado) {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch(`/api/contact/${id}`, {
+    await fetch(`http://localhost:3001/api/contact/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

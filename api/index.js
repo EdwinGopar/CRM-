@@ -8,7 +8,12 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Cambia esto si tu frontend está en otro origen
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
+
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../landing/public')));
@@ -48,6 +53,7 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // GET /api/contact - Obtener todos los mensajes
+// Obtener todos los leads desde la base de datos
 app.get('/api/contact', async (req, res) => {
   try {
     const [rows] = await pool.execute('SELECT * FROM messages ORDER BY created_at DESC');
@@ -57,6 +63,7 @@ app.get('/api/contact', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los mensajes' });
   }
 });
+
 
 // PUT /api/contact/:id - Actualizar un mensaje
 app.put('/api/contact/:id', async (req, res) => {

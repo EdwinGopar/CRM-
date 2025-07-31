@@ -4,14 +4,15 @@ const pool = require('../db/connection');
 
 // 🔐 Registro
 const register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { name, email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const [result] = await pool.execute(
-      'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-      [username, email, hashedPassword]
+      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+      [name, email, hashedPassword]
     );
+    console.log(result, "response regu¿ister")
 
     res.status(201).json({ message: 'Usuario registrado exitosamente', id: result.insertId });
   } catch (err) {

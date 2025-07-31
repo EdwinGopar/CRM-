@@ -104,57 +104,58 @@
 
   <!-- 🧠 JS FUNCIONAL -->
   <script>
-    document.getElementById("authBtn").addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("authModal").style.display = "flex";
-    });
+  document.getElementById("authBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("authModal").style.display = "flex";
+  });
 
-    document.getElementById("contactForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
+  document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      const form = e.target;
-      const data = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-        message: form.message.value.trim()
-      };
+    const form = e.target;
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      message: form.message.value.trim()
+    };
 
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
+    try {
+      const response = await fetch('http://localhost:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
-        const isJson = response.headers.get('content-type')?.includes('application/json');
-        const result = isJson ? await response.json() : {};
+      const isJson = response.headers.get('content-type')?.includes('application/json');
+      const result = isJson ? await response.json() : {};
 
-        if (response.ok) {
-          Swal.fire({
-            title: '¡Mensaje enviado!',
-            text: result.message || 'Gracias por contactarnos. Te responderemos pronto.',
-            icon: 'success',
-            confirmButtonColor: '#00ff91'
-          });
-          form.reset();
-        } else {
-          throw new Error(result.error || 'Error al enviar el mensaje');
-        }
-
-      } catch (error) {
-        console.error('❌ Error:', error);
+      if (response.ok) {
         Swal.fire({
-          title: 'Error',
-          text: error.message || 'No se pudo enviar el mensaje',
-          icon: 'error',
-          confirmButtonColor: '#ff4d4d'
+          title: '¡Mensaje enviado!',
+          text: result.message || 'Gracias por contactarnos. Te responderemos pronto.',
+          icon: 'success',
+          confirmButtonColor: '#00ff91'
         });
+        form.reset();
+      } else {
+        throw new Error(result.error || 'Error al enviar el mensaje');
       }
-    });
-  </script>
+
+    } catch (error) {
+      console.error('❌ Error:', error);
+      Swal.fire({
+        title: 'Error',
+        text: error.message || 'No se pudo enviar el mensaje',
+        icon: 'error',
+        confirmButtonColor: '#ff4d4d'
+      });
+    }
+  });
+</script>
+
 
 </body>
 </html>

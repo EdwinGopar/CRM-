@@ -18,7 +18,7 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - ./landing:/usr/share/nginx/html
+      - ./landing/public:/usr/share/nginx/html
     networks:
       - app-network
 
