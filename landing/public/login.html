@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - CRM</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .auth-box {
+      background: #222;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 145, 0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .auth-box h2 {
+      margin-bottom: 25px;
+      font-size: 1.8em;
+      color: #00ff91;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .auth-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00ff91;
+      color: #000;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .auth-box button:hover {
+      background-color: #00cc73;
+    }
+
+    .auth-box p {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    .auth-box a {
+      color: #00ff91;
+      font-weight: bold;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      display: inline-block;
+      color: #00ff91;
+      background-color: transparent;
+      border: 2px solid #00ff91;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #00ff91;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-box">
+    <h2>Iniciar sesión</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Correo electrónico" required />
+      <input type="password" id="password" placeholder="Contraseña" required />
+      <button type="submit">Entrar</button>
+    </form>
+    <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
+
+    <!-- ✅ Botón de volver a la landing -->
+<a href="/" class="back-button">Volver a inicio</a>
+
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
