@@ -1,32 +1,90 @@
-document.getElementById("registerForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  if (!username || !email || !password) {
-    alert("Por favor, completa todos los campos.");
-    return;
-  }
-
-  try {
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert("✅ Registro exitoso. Ahora puedes iniciar sesión.");
-      window.location.href = "login.html";
-    } else {
-      alert(data.error || "❌ Error al registrarse.");
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro - CRM</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-  } catch (err) {
-    console.error("❌ Error de red o servidor:", err);
-    alert("❌ Ocurrió un error al intentar registrarse.");
-  }
-});
+
+    .auth-box {
+      background: #222;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 145, 0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .auth-box h2 {
+      margin-bottom: 25px;
+      font-size: 1.8em;
+      color: #00ff91;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .auth-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00ff91;
+      color: #000;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .auth-box button:hover {
+      background-color: #00cc73;
+    }
+
+    .auth-box p {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    .auth-box a {
+      color: #00ff91;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-box">
+    <h2>Crear cuenta</h2>
+    <!-- register.html -->
+<form id="registerForm">
+  <input type="text" id="username" placeholder="Usuario" required />
+  <input type="email" id="email" placeholder="Correo electrónico" required />
+  <input type="password" id="password" placeholder="Contraseña" required />
+  <button type="submit">Registrarse</button>
+</form>
+
+    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+  </div>
+
+  <script src="js/register.js"></script>
+
+</body>
+</html>
